@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+
+// @media (aspect-ratio: 1/2) {
+//     html {
+//         background-color: beige !important;
+//     }
+// }
+html,
+body {
+    background-color: whitesmoke;
+    overflow: hidden;
+}
+
+#game {
+    width: 70vw;
+    margin: 0 auto;
+    height: 55vh;
+}
+
+// mobile
+@media screen and (max-aspect-ratio: 1/1) {
+    #game {
+        width: 90vw;
+        height: 60vw;
+    }
+}

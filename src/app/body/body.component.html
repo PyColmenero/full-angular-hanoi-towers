@@ -1,0 +1,86 @@
+<app-navbar></app-navbar>
+
+<div class="gamecontainer d-flex align-items-center align-content-center justify-content-center flex-wrap">
+
+    <div id="info" class="pb-5 px-3 mb-5 mb-md-0 w-100">
+        <div class="row">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-4 mx-auto">
+                <h1 class="text-center mb-4">Hanoi Towers</h1>
+                <div class="input-group mb-3">
+                    <button class="input-group-text bg-white me-2" id="basic-addon1" (click)="reload()">
+                        <i class="bi bi-arrow-clockwise"></i>
+                    </button>
+                    <select class="form-select" (change)="change_disk_amount($event)" aria-label="diskamount" aria-describedby="basic-addon1">
+                        <option value="2">2 discos</option>
+                        <option value="3">3 discos</option>
+                        <option value="4">4 discos</option>
+                        <option value="5">5 discos</option>
+                        <option value="6" selected>6 discos</option>
+                        <option value="7">7 discos</option>
+                        <option value="8">8 discos</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="appgame">
+        <div class="win position-absolute bg-dark bg-opacity-75 vh-100 vw-100 top-0 start-0 winpanel d-flex align-items-center shadow" *ngIf="gameover">
+            <div class="panel bg-white h-75 m-auto col-10 col-md-8 col-lg-6 col-xl-4 position-relative">
+                <div class="bg-dark text-white px-4 py-2">
+                    <h2 class="text-center">Has ganado!</h2>
+                </div>
+                <div class="p-4">
+                    <h3 class="mb-2">Estadísticas:</h3>
+                    <p class="m-0">Discos: {{hanoi_disk_amount}}.</p>
+                    <p class="m-0">Movimientos mínimos: {{min_movements}}.</p>
+                    <p class="m-0">Movimientos: {{movements_amount}}.</p>
+                    <p class="m-0">Tiempo transcurrido: {{minutes_seconds_elapsed}}.</p>
+                </div>
+                <button (click)="reload()" class="btn btn-success rounded-0 w-100 position-absolute bottom-0">Jugar de nuevo</button>
+            </div>
+        </div>
+
+
+        <div id="game">
+            <div class="row position-relative map h-100 w-100 m-0">
+
+                <div class="col-4 hanoitower p-0">
+
+                    <div class="hanoistick" [class.tower-selected]="click_tower_index === 0 && waiting_for_second_click === true"></div>
+
+                </div>
+                <div class="col-4 hanoitower p-0">
+
+                    <div class="hanoistick" [class.tower-selected]="click_tower_index === 1 && waiting_for_second_click === true"></div>
+
+                </div>
+                <div class="col-4 hanoitower p-0">
+
+                    <div class="hanoistick" [class.tower-selected]="click_tower_index === 2 && waiting_for_second_click === true"></div>
+
+                </div>
+
+                <div class="hanoidisks w-100 position-relative top-0 h-0">
+                    <div *ngFor="let disk of hanoi_disks" class="hanoidisk" style="bottom: {{disk.y}}px; left: {{disk.x}}px; height:{{disks_height}}px; width:{{disk.size}}px;">
+                        <div class="h-100 w-100 position-relative">
+                            <span class="position-absolute top-50 start-50 translate-middle number">{{(hanoi_disk_amount-disk.id)+1}}</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="position-absolute w-100 h-100 ">
+                    <div class="row h-100 w-100 m-0">
+                        <div class="col-4 h-100 p-0" (click)="click(0)"></div>
+                        <div class="col-4 h-100 p-0" (click)="click(1)"></div>
+                        <div class="col-4 h-100 p-0" (click)="click(2)"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="hanoibase"></div>
+        </div>
+    </div>
+
+</div>
